@@ -1,0 +1,34 @@
+{
+  "name": "ui-components",
+  "version": "1.0.0",
+  "description": "Matgeek UI Components",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run preview:watch",
+    "dist": "npm run app:dist && npm run app:dev && npm run preview:normalize && npm run preview:dist",
+
+    "app:dist": "node-sass --output-style compressed app/stylesheets/_ui_components.scss > ui_components.min.css",
+    "app:dev": "node-sass --output-style expanded app/stylesheets/_ui_components.scss > ui_components.css",
+
+    "preview:dist": "npm run preview:normalize && npm run preview:dist:css",
+    "preview:dist:css": "node-sass --output-style compressed --include-path node_modules/bourbon/app/assets/stylesheets/ --include-path node_modules/bourbon-neat/app/assets/stylesheets/ preview/css/style.scss > preview/css/style.css",
+
+    "preview:dev": "npm run app:dev && npm run preview:normalize && npm run preview:dev:css",
+    "preview:dev:css": "node-sass --output-style expanded --include-path node_modules/bourbon/app/assets/stylesheets/ --include-path node_modules/bourbon-neat/app/assets/stylesheets/ preview/css/style.scss > preview/css/style.css",
+
+    "preview:normalize": "cp node_modules/normalize.css/normalize.css preview/css/normalize.css",
+
+    "preview:watch": "nodemon -e scss -w app/stylesheets/ -w preview/css/ -x 'npm run preview:dev'"
+  },
+  "author": "Erik Hedberg <erik@hedberg.at>",
+  "license": "ISC",
+  "dependencies": {
+    "bourbon": "^4.2.5"
+  },
+  "devDependencies": {
+    "bourbon-neat": "^1.7.2",
+    "node-sass": "^3.3.3",
+    "nodemon": "^1.7.1",
+    "normalize.css": "^3.0.3"
+  }
+}
